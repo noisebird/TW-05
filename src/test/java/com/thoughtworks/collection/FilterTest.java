@@ -8,7 +8,7 @@ import static org.fest.assertions.api.Assertions.assertThat;
 
 public class FilterTest {
 
-    @Test
+  /*  @Test
     public void should_return_even() {
         //求数组中的偶数
         Integer[] array = new Integer[]{1, 2, 3, 4, 5};
@@ -22,7 +22,7 @@ public class FilterTest {
         assertThat(filter.filterEven()).isEqualTo(resultList);
     }
 
-    @Test
+   @Test
     public void should_return_multiple_of_three() {
         //求数组中3的倍数
         Integer[] array = new Integer[]{6, 2, 3, 4, 9};
@@ -36,6 +36,8 @@ public class FilterTest {
         assertThat(filter.filterMultipleOfThree()).isEqualTo(resultList);
     }
 
+
+
     @Test
     public void should_return_different_elements_in_arrayList() {
         //去除数组中的重复元素
@@ -48,7 +50,7 @@ public class FilterTest {
         Filter filter = new Filter(arrayList);
         assertThat(filter.getDifferentElements()).isEqualTo(resultList);
     }
-
+ */
     @Test
     public void should_return_common_elements() {
         //求两数组的公共元素
