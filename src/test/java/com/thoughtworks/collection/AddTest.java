@@ -9,6 +9,7 @@ import static org.fest.assertions.api.Assertions.assertThat;
 
 public class AddTest {
 
+
     @Test
     public void should_get_sum_of_evens() {
         //求leftBorder 和rightBorder之间的偶数和
@@ -42,6 +43,7 @@ public class AddTest {
         assertThat(add.getSumTripleAndAddTwo(arrayList)).isEqualTo(390);
     }
 
+
     @Test
     public void should_get_triple_of_odd_and_add_two() {
         //求数组中奇数元素的3倍加2，偶数元素不变的数组
@@ -58,6 +60,7 @@ public class AddTest {
 
     @Test
     public void should_get_sum_of_processed_odd() {
+
         //求数组中奇数元素的3倍加5的和
         Integer[] array = new Integer[]{1, 5, 7, 12, 11, 35, 54, 67, 70};
         List<Integer> arrayList = Arrays.asList(array);
@@ -66,8 +69,10 @@ public class AddTest {
         assertThat(add.getSumOfProcessedOdds(arrayList)).isEqualTo(408);
     }
 
+
     @Test
     public void should_process_elements() {
+        //题目有问题，描述不清楚，应该是当前元素和下一个元素
         // 数组中前一个元素和后一个元素的和的3倍的数组
         Integer[] array = new Integer[]{1, 3, 5, 7, 9, 11, 13, 15, 17, 19, 21};
         List<Integer> arrayList = Arrays.asList(array);
@@ -80,6 +85,7 @@ public class AddTest {
         assertThat(add.getProcessedList(arrayList)).isEqualTo(resultList);
     }
 
+
     @Test
     public void should_return_median_of_even_index() {
         //求数组中所有偶数组成的数组的中位数
@@ -90,6 +96,7 @@ public class AddTest {
         assertThat(add.getMedianOfEvenIndex(arrayList)).isEqualTo((double) 3);
     }
 
+
     @Test
     public void should_return_average_of_even_index() {
         //求数组中所有偶数的平均数
@@ -99,6 +106,7 @@ public class AddTest {
         Add add = new Add();
         assertThat(add.getAverageOfEvenIndex(arrayList)).isEqualTo((double) 3);
     }
+
 
     @Test
     public void should_return_whether_include_special_element() {
