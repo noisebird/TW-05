@@ -9,7 +9,7 @@ import static org.fest.assertions.api.Assertions.assertThat;
 
 public class FlatenTest {
 
-    @Test
+   @Test
     public void can_transform_two_dimensional_array_to_one() {
         //把二维数组变成一维数组
         Integer[][] array = new Integer[][]{{1}, {2}, {3, 4}};
