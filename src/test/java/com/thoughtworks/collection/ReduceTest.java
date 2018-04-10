@@ -4,7 +4,6 @@ import org.junit.Test;
 
 import java.util.Arrays;
 import java.util.List;
-
 import static org.fest.assertions.api.Assertions.assertThat;
 import static org.mockito.Mockito.*;
 
@@ -15,12 +14,9 @@ public class ReduceTest {
         // 获取数组中的最大值
         Integer[] array = new Integer[]{1, 5, 7, 2, 8, 9, 3, 2};
         List<Integer> arrayList = Arrays.asList(array);
-
         Reduce reduce = new Reduce(arrayList);
-
         assertThat(reduce.getMaximum()).isEqualTo(9);
     }
-
     @Test
     public void should_get_minimum_of_list() {
         //获取数组中的最小值
@@ -32,6 +28,7 @@ public class ReduceTest {
         assertThat(reduce.getMinimum()).isEqualTo(1);
     }
 
+
     @Test
     public void should_get_average_of_list() {
         // 获取数组的平均值
@@ -42,6 +39,7 @@ public class ReduceTest {
 
         assertThat(reduce.getAverage()).isEqualTo(48.5);
     }
+
 
     @Test
     public void should_get_element_in_middle_position_with_order_elements() {
@@ -65,16 +63,12 @@ public class ReduceTest {
     //获取单链表中的中位数
         Integer[] array = new Integer[]{1, 4, 6, 2, 3, 10, 9, 8, 11, 2, 19, 30};
         List<Integer> arrayList = Arrays.asList(array);
-
         SingleLink<Integer> singleLink = mock(SingleLink.class);
         when(singleLink.getNode(6)).thenReturn(10);
         when(singleLink.getNode(7)).thenReturn(9);
-
         Reduce reduce = new Reduce(arrayList);
-
         assertThat(reduce.getMedianInLinkList(singleLink)).isEqualTo(9.5);
         verify(singleLink, times(12)).addTailPointer(anyInt());
-
     }
 
     @Test
@@ -87,6 +81,7 @@ public class ReduceTest {
         assertThat(reduce.getFirstEven()).isEqualTo(20);
     }
 
+
     @Test
     public void should_return_index_of_first_even_element() {
         //获取数组中第一个偶数的下标
@@ -96,6 +91,7 @@ public class ReduceTest {
         Reduce reduce = new Reduce(arrayList);
         assertThat(reduce.getIndexOfFirstEven()).isEqualTo(3);
     }
+
 
     @Test
     public void should_return_last_even_element() {
@@ -116,7 +112,6 @@ public class ReduceTest {
         Reduce reduce = new Reduce(arrayList);
         assertThat(reduce.getIndexOfLastOdd()).isEqualTo(9);
     }
-
     @Test
     public void can_judge_whether_is_equal() {
         //判断两个数组是否相等
@@ -130,4 +125,5 @@ public class ReduceTest {
         assertThat(reduce.isEqual(arrayList)).isEqualTo(true);
         assertThat(reduce.isEqual(differentArrayList)).isEqualTo(false);
     }
+
 }

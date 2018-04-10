@@ -8,7 +8,7 @@ import static org.fest.assertions.api.Assertions.assertThat;
 
 public class MyMapTest {
 
-    @Test
+   /* @Test
     public void should_map_to_triple() {
         //将集合A中得元素映射成集合B中的元素
 
@@ -23,7 +23,7 @@ public class MyMapTest {
         assertThat(myMap.getTriple()).isEqualTo(resultList);
     }
 
-    @Test
+   @Test
     public void should_map_to_letter() {
         //数字映射为字母
         Integer[] array = new Integer[]{1, 2, 3, 4, 5};
@@ -36,6 +36,7 @@ public class MyMapTest {
 
         assertThat(myMap.mapLetter()).isEqualTo(resultList);
     }
+
 
     @Test
     public void should_map_to_letters() {
@@ -64,6 +65,8 @@ public class MyMapTest {
 
         assertThat(myMap.sortFromBig()).isEqualTo(resultList);
     }
+*/
+
 
     @Test
     public void should_sort_from_small_to_big() {
