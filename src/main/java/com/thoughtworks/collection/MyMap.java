@@ -2,7 +2,10 @@ package com.thoughtworks.collection;
 
 import sun.reflect.generics.reflectiveObjects.NotImplementedException;
 
+import java.text.CollationElementIterator;
 import java.util.*;
+import java.util.stream.Collectors;
+import java.util.stream.IntStream;
 
 public class MyMap {
 
@@ -16,51 +19,32 @@ public class MyMap {
     }
 
     public List<Integer> getTriple() {
-
-        List<Integer> list = new ArrayList<Integer>();
-        for (int i : array) {
-            list.add(i * 3);
-        }
-        return list;
+        return array.stream().map(item -> item * 3).collect(Collectors.toList());
     }
 
     public List<String> mapLetter() {
-        List<String> list = new ArrayList<String>();
-        for (int i : array) {
-            list.add(letters[i - 1]);
-        }
-        return list;
+        return IntStream.rangeClosed(array.get(0), array.get(array.size() - 1)).mapToObj(item -> letters[item - 1]).collect(Collectors.toList());
     }
 
     public List<String> mapLetters() {
-        List<String> list = new ArrayList<String>();
-        for (int i : array) {
+        return array.stream().map(item -> {
             String str = "";
-            int count = (i - 1) / 26;
-            int index = i % 26 == 0 ? 25 : i % 26 - 1;
+            int count = (item - 1) / 26;
+            int index = item % 26 == 0 ? 25 : item % 26 - 1;
             if (count > 0) {
                 str = letters[count - 1] + letters[index];
             } else {
                 str = letters[index];
             }
-
-            list.add(str);
-        }
-        return list;
+            return str;
+        }).collect(Collectors.toList());
     }
 
     public List<Integer> sortFromBig() {
-        List<Integer> list=new ArrayList<Integer>();
-        list.addAll(array);
-        Collections.reverse(list);
-
-        return list;
+        return array.stream().sorted((value1, value2) -> value2 - value1).collect(Collectors.toList());
     }
 
     public List<Integer> sortFromSmall() {
-        List<Integer> list=new ArrayList<Integer>();
-        list.addAll(array);
-        Collections.sort(array);
-        return array;
+        return array.stream().sorted().collect(Collectors.toList());
     }
 }

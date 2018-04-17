@@ -9,7 +9,7 @@ import static org.fest.assertions.api.Assertions.assertThat;
 
 public class CollectionOperatorTest {
 
-   /* @Test
+    @Test
     public void should_return_list_by_Interval() {
         //选出给定区间中所有的数字
 
@@ -82,7 +82,7 @@ public class CollectionOperatorTest {
         CollectionOperator collectionOperator = new CollectionOperator();
         assertThat(collectionOperator.popCommonElement(firstArray, secondArray)).isEqualTo(resultList);
     }
-*/
+
 
     @Test
     public void should_add_uncommon_elements_to_first_array() {

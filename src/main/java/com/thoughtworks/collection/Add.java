@@ -2,155 +2,82 @@ package com.thoughtworks.collection;
 
 import sun.reflect.generics.reflectiveObjects.NotImplementedException;
 
+import java.io.InputStream;
+import java.text.CollationElementIterator;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Iterator;
 import java.util.List;
+import java.util.stream.Collectors;
+import java.util.stream.IntStream;
+import java.util.stream.Stream;
 
 public class Add {
     public int getSumOfEvens(int leftBorder, int rightBorder) {
         int max = leftBorder > rightBorder ? leftBorder : rightBorder;
         int min = leftBorder > rightBorder ? rightBorder : leftBorder;
-        int sum = 0;
-        for (int i = min; i <= max; i++) {
-            if (i % 2 == 0) {
-                sum += i;
-            }
-        }
-        return sum;
+        return IntStream.range(min, max + 1).filter(item -> item % 2 == 0).sum();
+
 
     }
 
     public int getSumOfOdds(int leftBorder, int rightBorder) {
         int max = leftBorder > rightBorder ? leftBorder : rightBorder;
         int min = leftBorder > rightBorder ? rightBorder : leftBorder;
-        int sum = 0;
-        for (int i = min; i <= max; i++) {
-            if (i % 2 == 1) {
-                sum += i;
-            }
-        }
-        return sum;
+        return IntStream.rangeClosed(min, max).filter(item -> item % 2 == 1).sum();
     }
 
     public int getSumTripleAndAddTwo(List<Integer> arrayList) {
-        int sum = 0;
-        Iterator<Integer> iterator = arrayList.iterator();
-        while (iterator.hasNext()) {
-            int num = iterator.next();
-            sum += (num * 3 + 2);
-        }
-        return sum;
+        return arrayList.stream().mapToInt(item -> item * 3 + 2).sum();
     }
 
     public List<Integer> getTripleOfOddAndAddTwo(List<Integer> arrayList) {
-        List<Integer> list = new ArrayList<Integer>();
-        Iterator<Integer> iterator = arrayList.iterator();
-        while (iterator.hasNext()) {
-            int num = iterator.next();
-            int value = num % 2 == 1 ? num * 3 + 2 : num;
-            list.add(value);
-
-        }
-        return list;
+        return arrayList.stream().map(item -> item % 2 == 1 ? item * 3 + 2 : item).collect(Collectors.toList());
     }
 
     public int getSumOfProcessedOdds(List<Integer> arrayList) {
-        int sum = 0;
-        Iterator<Integer> iterator = arrayList.iterator();
-        while (iterator.hasNext()) {
-            int num = iterator.next();
-            if (num % 2 == 1) {
-                sum += (num * 3 + 5);
-            }
-        }
-        return sum;
+        return arrayList.stream().filter(item -> item % 2 == 1).mapToInt(item -> item * 3 + 5).sum();
     }
 
     public double getMedianOfEvenIndex(List<Integer> arrayList) {
         //中位数的求法：若数组位的长度为奇数，则中间的数就是中位数，若数组的长度为偶数，则取中间的两个数求和再除以二就是中位数。
-        List<Integer> list=new ArrayList<Integer>();
-        Iterator<Integer> iterator =arrayList.iterator();
-        while(iterator.hasNext()){
-            int num=iterator.next();
-            if (num % 2 == 0) {
-                list.add(num);
-            }
-        }
-        int mid=0;
-        int size=arrayList.size();
-        if(size%2==0){
-           mid=(arrayList.get(size/2-1)+arrayList.get(size/2))/2;
-        }else{
-            mid=arrayList.get(Math.round(size/2));
+        arrayList = arrayList.stream().filter(item -> item % 2 == 0).collect(Collectors.toList());
+        int mid = 0;
+        int size = arrayList.size();
+        if (size % 2 == 0) {
+            mid = (arrayList.get(size / 2 - 1) + arrayList.get(size / 2)) / 2;
+        } else {
+            mid = arrayList.get(Math.round(size / 2));
         }
         return mid;
     }
 
     public double getAverageOfEvenIndex(List<Integer> arrayList) {
-        int count=0;
-        int sum=0;
-        Iterator<Integer> iterator =arrayList.iterator();
-        while(iterator.hasNext()){
-            int num=iterator.next();
-            if (num % 2 == 0) {
-                sum+=num;
-                count++;
-            }
-        }
-        return sum/count;
+        return arrayList.stream().filter(item -> item % 2 == 0).mapToInt(item -> item).average().getAsDouble();
     }
 
     public boolean isIncludedInEvenIndex(List<Integer> arrayList, Integer specialElment) {
-        List<Integer> list=new ArrayList<Integer>();
-        Iterator<Integer> iterator =arrayList.iterator();
-        while(iterator.hasNext()){
-            int num=iterator.next();
-            if (num % 2 == 0) {
-               list.add(num);
-            }
-        }
-        return list.contains(specialElment);
+        return arrayList.stream().filter(item -> item % 2 == 0).collect(Collectors.toList()).contains(specialElment);
     }
 
     public List<Integer> getUnrepeatedFromEvenIndex(List<Integer> arrayList) {
-        List<Integer> list=new ArrayList<Integer>();
-        Iterator<Integer> iterator =arrayList.iterator();
-        while(iterator.hasNext()){
-            int num=iterator.next();
-            if (num % 2 == 0&&!list.contains(num)) {
-                list.add(num);
-            }
-        }
-        return list;
+        return arrayList.stream().filter(item -> item % 2 == 0).distinct().collect(Collectors.toList());
 
     }
 
     public List<Integer> sortByEvenAndOdd(List<Integer> arrayList) {
-        List<Integer> evenList=new ArrayList<Integer>();
-        List<Integer> oddList=new ArrayList<Integer>();
-        Iterator<Integer> iterator =arrayList.iterator();
-        while(iterator.hasNext()){
-            int num=iterator.next();
-            if (num % 2 == 0) {
-                evenList.add(num);
-            }else{
-                oddList.add(num);
-            }
-        }
-        Collections.sort(evenList);
-        Collections.reverse(oddList);
+
+
+        List<Integer> evenList = arrayList.stream().filter(item -> item % 2 == 0).sorted().collect(Collectors.toList());
+        List<Integer> oddList = arrayList.stream().filter(item -> item % 2 == 1).sorted((value1, value2) -> value2 - value1).collect(Collectors.toList());
         evenList.addAll(oddList);
         return evenList;
     }
 
     public List<Integer> getProcessedList(List<Integer> arrayList) {
-        List<Integer> list = new ArrayList<Integer>();
-        for (int i = 0; i < arrayList.size() - 1; i++) {
-            int current = arrayList.get(i);
-            int next = arrayList.get(i + 1);
-            list.add((current + next) * 3);
-        }
-        return list;
+        return IntStream.range(0, arrayList.size() - 1)
+                .mapToObj(index -> ((arrayList.get(index) + arrayList.get(index + 1)) * 3))
+                .collect(Collectors.toList());
+
     }
 }

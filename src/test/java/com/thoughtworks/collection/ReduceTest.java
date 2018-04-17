@@ -47,14 +47,10 @@ public class ReduceTest {
         Integer[] array = new Integer[]{1, 1, 1, 2, 3};
         List<Integer> arrayList = Arrays.asList(array);
         Reduce reduce = new Reduce(arrayList);
-
         assertThat(reduce.getOrderedMedian()).isEqualTo(1);
-
-
         Integer[] evenArray = new Integer[]{1, 1, 2, 3};
         List<Integer> EvenArrayList = Arrays.asList(evenArray);
         Reduce evenReduce = new Reduce(EvenArrayList);
-
         assertThat(evenReduce.getOrderedMedian()).isEqualTo(1.5);
     }
 

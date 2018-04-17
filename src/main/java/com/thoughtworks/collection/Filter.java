@@ -3,10 +3,12 @@ package com.thoughtworks.collection;
 import sun.reflect.generics.reflectiveObjects.NotImplementedException;
 import sun.rmi.server.InactiveGroupException;
 
+import java.text.CollationElementIterator;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
+import java.util.stream.Collectors;
 
 public class Filter {
 
@@ -17,49 +19,25 @@ public class Filter {
     }
 
     public List<Integer> filterEven() {
-        List<Integer> list = new ArrayList<Integer>();
-        Iterator<Integer> iterator = array.iterator();
-        while (iterator.hasNext()) {
-            int num = iterator.next();
-            if (num % 2 == 0) {
-                list.add(num);
-            }
-        }
-        return list;
+        return array.stream().filter(item -> item % 2 == 0).collect(Collectors.toList());
     }
 
     public List<Integer> filterMultipleOfThree() {
-        List<Integer> list = new ArrayList<Integer>();
-        Iterator<Integer> iterator = array.iterator();
-        while (iterator.hasNext()) {
-            int num = iterator.next();
-            if (num % 3 == 0) {
-                list.add(num);
-            }
-        }
-        return list;
+        return array.stream().filter(item -> item % 3 == 0).collect(Collectors.toList());
     }
 
     public List<Integer> getCommonElements(List<Integer> firstList, List<Integer> secondList) {
         List<Integer> list = new ArrayList<Integer>();
-        for (int i : firstList) {
-            if(secondList.contains(i)){
-                list.add(i);
+        firstList.stream().forEach(item->{
+            if (secondList.contains(item)) {
+                list.add(item);
             }
-        }
+        });
         return list;
 
     }
 
     public List<Integer> getDifferentElements() {
-        List<Integer> list = new ArrayList<Integer>();
-        Iterator<Integer> iterator = array.iterator();
-        while (iterator.hasNext()) {
-            int num = iterator.next();
-            if(!list.contains(num)){
-                list.add(num);
-            }
-        }
-        return list;
+        return array.stream().distinct().collect(Collectors.toList());
     }
 }

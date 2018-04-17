@@ -3,6 +3,7 @@ package com.thoughtworks.collection;
 import sun.reflect.generics.reflectiveObjects.NotImplementedException;
 
 import java.util.*;
+import java.util.stream.Collectors;
 
 public class Reduce {
 
@@ -13,36 +14,18 @@ public class Reduce {
     }
 
     public int getMaximum() {
-
-        int max = Collections.max(arrayList);
-        return max;
+        return Collections.max(arrayList);
     }
 
     public double getMinimum() {
-
-        int min = Collections.min(arrayList);
-        return min;
+        return Collections.min(arrayList);
     }
 
     public double getAverage() {
-        double sum = 0;
-        for (int i : arrayList) {
-            sum += i;
-        }
-
-        return sum / arrayList.size();
+        return arrayList.stream().mapToInt(item -> item).average().getAsDouble();
     }
 
     public double getOrderedMedian() {
-
-        List<Integer> list = new ArrayList<Integer>();
-        Iterator<Integer> iterator = arrayList.iterator();
-        while (iterator.hasNext()) {
-            int num = iterator.next();
-            if (num % 2 == 0) {
-                list.add(num);
-            }
-        }
         double mid = 0;
         int size = arrayList.size();
         if (size % 2 == 0) {
@@ -54,34 +37,23 @@ public class Reduce {
     }
 
     public int getFirstEven() {
-
-        int even = -1;
-        for (int i : arrayList) {
-            if (i % 2 == 0) {
-                even = i;
-                break;
-            }
-        }
-        return even;
+        return arrayList.stream().filter(item -> item % 2 == 0).findFirst().get();
     }
 
     public int getIndexOfFirstEven() {
         int even = getFirstEven();
-        int index = arrayList.indexOf(even);
-        return index;
+        return arrayList.indexOf(even);
     }
 
-    public boolean isEqual(List<Integer> arrayList) {
-        if (arrayList.size() == this.arrayList.size()) {
-            for (int i = 0; i < arrayList.size(); i++) {
-                if (arrayList.get(i) != this.arrayList.get(i)) {
-                    return false;
-                }
+    public boolean isEqual(List<Integer> arrayLists) {
+        Collections.sort(arrayLists);
+        Collections.sort(arrayList);
+        return arrayLists.stream().allMatch(item -> {
+            if (arrayLists.size() != arrayList.size()) {
+                return false;
             }
-            return true;
-        } else {
-            return false;
-        }
+            return arrayList.contains(item);
+        });
 
     }
 
